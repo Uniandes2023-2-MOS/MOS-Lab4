@@ -31,14 +31,14 @@ M.du[2]=120
 
 M.sk = Param(M.N, mutable=True) #Cantidad de procesos a suministrar para los kernel
 
-M.su[1]=60
-M.su[2]=80
-M.su[3]=50
+M.sk[1]=60
+M.sk[2]=80
+M.sk[3]=50
 
 M.dk = Param(M.L, mutable=True) #Cantidad de procesos demandada para los kernel
 
-M.du[1]=100
-M.du[2]=90
+M.dk[1]=100
+M.dk[2]=90
 
 M.x = Var(M.N,M.L, domain=PositiveReals) #procesos de procesador usuario
  
@@ -62,7 +62,7 @@ def res3(M,j):      # En GAMS se ve asi:  enviadosK(j) .. sum((i), xk(i,j)) =e= 
 M.res3 = Constraint(M.L, rule=res3)
 
 def res4(M,i):      # En GAMS se ve asi:  recibidosK(i) .. sum((j), xk(i,j)) =e= nk(i)
-    return sum(M.xk[i,j] for j in M.L) == M.sk[j]
+    return sum(M.xk[i,j] for j in M.L) == M.sk[i]
 
 M.res4 = Constraint(M.N, rule=res4)
 
